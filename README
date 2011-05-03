@@ -1,0 +1,11 @@
+
+This module is added to make saner downloads of webform data.
+
+Specifically, when there is a field with checkboxes, a separate column is 
+created for each checkbox, which is a giant pain. This module seeks to fix
+that by combining the data in each checkbox.
+
+Questions or comments about this code?  Here's my contact info: http://www.dmuth.org/contact
+
+Questions or comments about Anthrocon? Visit our website! http://www.anthrocon.org/
+
