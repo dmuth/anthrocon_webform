@@ -1,0 +1,29 @@
+<?php
+/**
+* Anthrocon webform module.
+*
+* This module adds better download functionality to the webform module.
+*
+* @author Douglas Muth <http://www.dmuth.org/>
+*/
+
+
+/**
+* Our init hook.
+*/
+function anthrocon_webform_init() {
+} // End of anthrocon_webform_init()
+
+
+/**
+* Our main page.
+*/
+function anthrocon_webform_main() {
+
+	$retval = "";
+
+	return($retval);
+
+} // End of anthrocon_webform_main()
+
+

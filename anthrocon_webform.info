@@ -1,0 +1,8 @@
+
+name = Anthrocon Webform
+description = "Adds better download functionality to the webform module."
+package = Anthrocon
+core = 6.x
+
+version = 1.0
+
