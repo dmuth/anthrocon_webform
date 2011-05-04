@@ -161,6 +161,13 @@ function anthrocon_webform_query_data($nid) {
 
 	}
 
+	//
+	// Put the last row onto the set.
+	//
+	if (!empty($row)) {
+		$rows[] = $row;
+	}
+
 	print "<pre>"; print_r($rows); print "</pre>"; // Debugging
 
 /*
