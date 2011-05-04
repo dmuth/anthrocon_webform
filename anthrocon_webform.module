@@ -8,6 +8,10 @@
 */
 
 
+require_once("form.inc.php");
+require_once("menu.inc.php");
+
+
 /**
 * Our init hook.
 */
@@ -22,18 +26,60 @@ function anthrocon_webform_main() {
 
 	$retval = "";
 
+	$retval .= drupal_get_form("anthrocon_webform_form");
+
 	return($retval);
 
 } // End of anthrocon_webform_main()
 
 
 /**
-* TODO:
-* Form that lists all webforms by title
-* Save preferences with user_save()
-* Button to download
-* Checkbox to print results instead of download
+* Get a list of our webforms
 *
+* @return array An array where the key is the NID and the value is 
+*	the name of the webform.
 */
+function anthrocon_webform_get_webforms() {
+
+	$retval = array();
+
+	$query = "SELECT webform.nid, title "
+		. "FROM {webform} "
+		. "JOIN {node} "
+			. "ON webform.nid = node.nid "
+		. "ORDER BY nid DESC "
+		;
+	$cursor = db_query($query);
+	while ($row = db_fetch_array($cursor)) {
+		$id = $row["nid"];
+		$name = $row["title"] . " (NID: $id)";
+		$retval[$id] = $name;
+	}
+
+	return($retval);
+
+} // End of anthrocon_webform_get_webforms()
+
+
+/**
+* Get a filename from our node.
+*
+* @param object $node The node object
+*
+* @return string The filename
+*/
+function anthrocon_webform_get_filename($node) {
+
+	$retval = "";
+
+	$title = $node->title;
+	$title = preg_replace("/[^a-z0-9]/i", "-", $title);
+	$date_string = date("YmdHis");
+	
+	$retval = "webform-" . $title . "-" . $date_string . ".txt";
+
+	return($retval);
+
+} // End of anthrocon_webform_get_filename()
 
 
