@@ -95,13 +95,33 @@ function anthrocon_webform_query_data($nid) {
 		;
 	$query_args = array($nid);
 	$cursor = db_query($query, $query_args);
+	$rows = anthrocon_webform_query_data_rows($cursor);
 
-	//
-	// We're going to build a state machine here, which will keep track
-	// of the current registration, store it in $row as a temporary home,
-	// and eventually place it in $rows.
-	//
-	$rows = array();
+	print "<pre>"; print_r($rows); print "</pre>"; // Debugging
+
+/*
+TODO:
+Turn the timestamp into a human-readable value
+Set $retval to text output
+*/
+
+	return($retval);
+
+} // End of anthrocon_webform_query_data()
+
+
+/**
+* Process the result set from our query, and turn it into a proper
+* array of form submissions.
+*
+* @param object $cursor Our result cursor from the query.
+*
+* @return array An array of form submissions.
+*/
+function anthrocon_webform_query_data_rows($cursor) {
+
+	$retval = array();
+
 	$row = array();
 	$old_id = 0;
 	while ($result = db_fetch_array($cursor)) {
@@ -114,7 +134,7 @@ function anthrocon_webform_query_data($nid) {
 		if ($id != $old_id) {
 
 			if (!empty($row)) {
-				$rows[] = $row;
+				$retval[] = $row;
 			}
 
 			$row = array();
@@ -165,19 +185,12 @@ function anthrocon_webform_query_data($nid) {
 	// Put the last row onto the set.
 	//
 	if (!empty($row)) {
-		$rows[] = $row;
+		$retval[] = $row;
 	}
-
-	print "<pre>"; print_r($rows); print "</pre>"; // Debugging
-
-/*
-TODO: 
-Refactor state machine loop into a separate array
-Set $retval to text output
-*/
 
 	return($retval);
 
-} // End of anthrocon_webform_query_data()
+} // End of anthrocon_webform_query_data_rows()
+
 
 
