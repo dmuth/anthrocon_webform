@@ -64,13 +64,17 @@ function anthrocon_webform_form_submit($form, $form_state) {
 	$params["ac_webform"]["dump"] = $dump;
 	user_save($GLOBALS["user"], $params);
 
-	$node = node_load($nid);
+	//
+	// Get the results from our webform
+	//
+	$text = anthrocon_webform_query($nid);
 	
 	if (!$dump) {
 		//
 		// Start a download in the user's browser
 		//
-
+	
+		$node = node_load($nid);
 		$filename = anthrocon_webform_get_filename($node);
 		//print $filename;exit(); // Debugging
 
