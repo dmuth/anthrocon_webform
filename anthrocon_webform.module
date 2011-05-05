@@ -12,6 +12,7 @@ require_once("form.inc.php");
 require_once("menu.inc.php");
 require_once("query.inc.php");
 require_once("query_data_rows.inc.php");
+require_once("query_data_text.inc.php");
 
 
 /**

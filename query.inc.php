@@ -38,6 +38,16 @@ function anthrocon_webform_query_header($nid) {
 
 	$retval = "";
 
+	//
+	// Prepend some common headers for every dump
+	//
+	$retval .= "sumission_id"
+		. "\tuser_id"
+		. "\tuser"
+		. "\tdate_submitted"
+		. "\tip"
+		;
+
 	$query = "SELECT "
 		. "name, cid, type "
 		. "FROM {webform_component} "
@@ -100,13 +110,9 @@ function anthrocon_webform_query_data($nid) {
 	$cursor = db_query($query, $query_args);
 	$rows = anthrocon_webform_query_data_rows($cursor);
 
-	print "<pre>"; print_r($rows); print "</pre>"; // Debugging
+	//print "<pre>"; print_r($rows); print "</pre>"; // Debugging
 
-/*
-TODO:
-Set $retval to text output
 	$retval = anthrocon_webform_query_data_text($rows);
-*/
 
 	return($retval);
 
