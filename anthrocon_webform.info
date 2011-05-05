@@ -6,3 +6,5 @@ core = 6.x
 
 version = 1.0
 
+dependencies[] = webform
+
