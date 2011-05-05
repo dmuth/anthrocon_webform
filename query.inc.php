@@ -79,7 +79,8 @@ function anthrocon_webform_query_data($nid) {
 	$retval = "";
 
 	$query = "SELECT "
-		. "s.sid, data.cid, data.no, c.name AS c_name, "
+		. "s.sid, s.uid, u.name AS username, "
+		. "data.cid, data.no, c.name AS c_name, "
 		. "c.type AS c_type, "
 		. "data.data, data.cid, "
 		. "s.submitted, s.remote_addr "
@@ -88,6 +89,8 @@ function anthrocon_webform_query_data($nid) {
 			. "ON s.sid = data.sid "
 		. "JOIN {webform_component} AS c "
 			. "ON data.nid = c.nid AND data.cid = c.cid "
+		. "JOIN {users} AS u "
+			. "ON s.uid = u.uid "
 		. "WHERE "
 		. "s.nid = '%s' "
 		. "ORDER by s.sid, data.cid, data.no "
@@ -101,8 +104,8 @@ function anthrocon_webform_query_data($nid) {
 
 /*
 TODO:
-Turn the timestamp into a human-readable value
 Set $retval to text output
+	$retval = anthrocon_webform_query_data_text($rows);
 */
 
 	return($retval);

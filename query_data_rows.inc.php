@@ -34,6 +34,9 @@ function anthrocon_webform_query_data_rows($cursor) {
 			}
 
 			$row = array();
+			$row["id"] = $result["sid"];
+			$row["uid"] = $result["uid"];
+			$row["user"] = $result["username"];
 			$row["submitted"] = date("r", $result["submitted"]);
 			$row["remote_addr"] = $result["remote_addr"];
 
